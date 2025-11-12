@@ -29,11 +29,11 @@ This paradigm might not be the most obvious choice for certain applications, but
 
 To get started, the first thing you’ll need is a repository. To create one, head to [https://github.com/new](https://github.com/new) and you’ll find a screen similar to the one below.
 
-{% include helpers/image.html name:"screen1.png" frame:false %}
+![GitHub repository creation screen](/assets/images/screen1.png)
 
 After choosing a name and description for the repository, proceed to Create repository. If all goes well, you should be taken to your new repository page. It’s not terribly interesting at this point, since we haven’t added any content, but it shows the repository address in the box highlighted in red. Make note of that, we’ll use it in a minute.
 
-{% include helpers/image.html name:"screen2.png" frame:false %}
+![New repository page](/assets/images/screen2.png)
 
 Next, let’s build our first page. Create a new directory and place a file called index.html inside it, with some simple HTML.
 
@@ -67,13 +67,13 @@ What’s happening here? We’re starting a new Git repository in the directory 
 
 If you refresh your repository page on GitHub, you should now see the file we’ve just uploaded.
 
-{% include helpers/image.html name:"screen2.png" frame:false %}
+![Repository with uploaded file](/assets/images/screen2.png)
 
 Finally, we need to enable GitHub Pages for this repository. On the screen shown above, click on _Settings_ and scroll down to the _GitHub Pages_ section. In the _Source_ selector, select _master_ as the branch to build from and click _Save_.
 
 After that, you should see a message confirming that your site is ready to be published and indicating its URL. If you navigate to it, you should be able to see your new website.
 
-{% include helpers/image.html name:"screen3.png" frame:false %}
+![GitHub Pages settings](/assets/images/screen3.png)
 
 ## Adding Jekyll to the mix
 
@@ -108,7 +108,7 @@ git push origin master
 
 In a few seconds, you’ll be able to refresh your GitHub URL and see your new Jekyll-powered site in action.
 
-{% include helpers/image.html name:"screen5.png" frame:false %}
+![Jekyll-powered site](/assets/images/screen5.png)
 
 ## Choosing a theme for your Jekyll site
 

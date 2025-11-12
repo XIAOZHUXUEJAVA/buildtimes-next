@@ -11,7 +11,7 @@ I vividly remember the first time I’ve used a CMS. It was the early 2000s and 
 
 This was a huge departure from the reality I knew back then, which involved manually editing HTML files on a text editor and pushing them to a server using FTP each and every time I wanted to make the slightest update to a piece of content. Going from that to instant updates with a few clicks on a graphical interface was a game changer.
 
-{% include helpers/image.html name:"phpnuke.png" caption:"Fig 1. Screenshot of the PHP-Nuke admin panel" %}
+![Fig 1. Screenshot of the PHP-Nuke admin panel](/assets/images/phpnuke.png)
 
 Almost two decades – or several Internet-centuries – later, the landscape of content management systems has changed dramatically, as you can easily guess by looking at the screenshot above. But what about the underlying principles and architecture behind these systems? Are products like WordPress or Drupal so radically different from the likes of PHP-Nuke?
 
@@ -21,7 +21,7 @@ In my opinion, calling WordPress a content management system is a big understate
 
 You can look at WordPress (and similar products) as large and opaque assembly lines – content goes in via user input on a graphical administration panel, and out comes fully-formatted and styled HTML pages, ready to be consumed by a web browser. What happens in between, and especially what’s running under the hood, is not entirely under your control. This is typically called the monolith CMS.
 
-{% include helpers/image.html name:"monolith.png" caption:"Fig 2. Architecture of a monolith CMS" frame:false %}
+![Fig 2. Architecture of a monolith CMS](/assets/images/monolith.png)
 
 The monolith architecture consists of a single system being in charge of storing and managing data, as well as presentation, by tightly coupling the templating layer responsible for printing data as web pages. This raises some questions around the principle of [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) and poses a few particularly relevant problems.
 
@@ -49,7 +49,7 @@ Having a server-side CMS that spits out fully-formatted HTML pages is not the ea
 
 A headless CMS tackles the problems above by separating logic from presentation, data from UI, admin panels from client-facing templates. It does so by introducing an API layer that makes content available in its raw form, with no presentational elements, in a format that is agnostic of programming language or runtime environment.
 
-{% include helpers/image.html name:"headless.png" caption:"Fig 3. Architecture of a headless CMS" frame:false %}
+![Fig 3. Architecture of a headless CMS](/assets/images/headless.png)
 
 The diagrams above outline how a headless CMS differs from a traditional monolith architecture. In figure 2, the communication between the core application and the templating engine happens via an in-memory call, meaning both entities must operate on the same machine. In contrast, the headless approach in figure 3 shows an API layer that exposes raw data that any consumer can read using HTTP calls, which are ubiquitous. For example, the diagram in figure 3 shows a scenario where a native app and a web server with its own templating engine both consume content from the CMS over HTTP calls.
 

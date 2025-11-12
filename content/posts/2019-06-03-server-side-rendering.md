@@ -19,7 +19,7 @@ That brings us to the current standard for the modern web, where an increasing n
 
 Whilst the difference between server-side and a client-side rendered websites may be subtle to the end user, the underlying architecture and the lifecycle of requests are fundamentally different. In a pure client-rendered application, the server doesn’t need to fetch, format and deliver any content to the browser. So what’s left for it to do? Very little, other than delivering the JavaScript application itself (the bundle file) and an almost blank HTML file that references it.
 
-{% include helpers/image.html name:"CSR-SSR.png" caption:"Data flow in client-side vs. server-side rendering" frame:false %}
+![Data flow in client-side vs. server-side rendering](/assets/images/CSR-SSR.png)
 
 This is an important distinction to make: immediately after the browser finishes downloading a client-rendered website from the server, it will not have any content or logic to run with. It will show an empty page until it’s able to download and interpret the application bundle, which in its turn will unwrap itself (or bootstrap) and start populating the page with visual elements. This is in stark contrast with the traditional server-rendered flow described above, where the browser receives pages that are ready for consumption.
 

@@ -65,7 +65,7 @@ For example, you might *identify* the pain of managing type 1 diabetes, *concept
 
 But these phases don't form a linear path that every creator follows in the same way; they're more like a funnel, where fewer and fewer ideas reach the next stage of the journey. Not everyone who can identify a problem is able to conceptualise a solution; not everyone who can conceptualise a solution has the skills or the means to build it; and not everyone who manages to build a product knows how to distribute it.
 
-{% include helpers/image.html name:"creators-funnel.png" caption:"Fig 1. Illustration of the creator's funnel" frame:false %}
+![Fig 1. Illustration of the creator's funnel](/assets/images/creators-funnel.png)
 
 This means that the amazing projects we see today don't represent all the creators, the ideas, or the potential out there — they're just the ones that made it through the creator's funnel. A classic case of [survivorship bias](https://en.wikipedia.org/wiki/Survivorship_bias).
 

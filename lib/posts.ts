@@ -20,6 +20,7 @@ export interface PostMeta {
   };
   audio?: string;
   queued?: boolean | string;
+  preface?: string;
 }
 
 export interface Post extends PostMeta {
@@ -68,6 +69,7 @@ export function getAllPosts(): PostMeta[] {
           external: data.external,
           audio: data.audio,
           queued: data.queued,
+          preface: data.preface,
         } as PostMeta;
       } catch (error) {
         console.error(`Error parsing ${fileName}:`, error);
@@ -105,6 +107,7 @@ export function getPostBySlug(slug: string): Post | null {
       external: data.external,
       audio: data.audio,
       queued: data.queued,
+      preface: data.preface,
     };
   } catch {
     return null;

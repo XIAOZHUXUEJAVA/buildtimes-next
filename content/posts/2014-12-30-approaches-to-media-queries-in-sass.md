@@ -263,7 +263,7 @@ I wanted to have a finer control over the intervals in the expressions, so I inc
 }
 ```
 
-### Infer media types and handle logic disjunction<
+### Infer media types and handle logic disjunction
 
 Similarly to the breakpoints, there's a list for media types and other static expressions declared by default (which you can override by setting the variable `$media-expressions`). This adds support for optional media types, such as *screen* or *handheld*, but it's also capable of correctly handling expressions with logical disjunctions, such as the retina media query we saw before. The disjunctions are declared as nested lists of strings.
 

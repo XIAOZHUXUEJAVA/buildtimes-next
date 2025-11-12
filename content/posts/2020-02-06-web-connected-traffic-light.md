@@ -14,7 +14,7 @@ A few years back, I completely fell in love with the [Paper Signals](https://pap
 
 This idea stayed at the back of my mind for a long time, and a few months ago I decided to build my own Internet-connected physical device.
 
-{% include helpers/video.html name:"paper-signal.mp4" caption:"Google Paper Signals experiment" %}
+<!-- Video: Google Paper Signals experiment (paper-signal.mp4) -->
 
 ## A traffic light
 
@@ -30,7 +30,7 @@ As for the enclosure, I [designed it](https://github.com/eduardoboucas/signally-
 
 After a failed enclosure design, after reading up on Ohm's law, LEDs and resistors, and after ruining a soldering iron (don't ask), I finally managed to piece everything together and assemble my traffic light. Yay!
 
-{% include helpers/image.html name:"traffic-light.jpg" caption:"The LEDs, the Raspberry Pi Zero and the finished enclosure" %}
+![The LEDs, the Raspberry Pi Zero and the finished enclosure](/assets/images/traffic-light.jpg)
 
 ## Writing the software
 
@@ -42,7 +42,7 @@ The Raspberry Pi Zero W has built-in Wi-Fi, which made it a breeze to connect it
 
 Eventually, I decided to create a Node.js app (the client) that I would install on the device, and a central API that I would host on the cloud. This API would then communicate with the client via WebSocket, which uses a single TCP connection for two-way communication and eliminates the issue of being behind a router or firewall.
 
-{% include helpers/image.html name:"diagram.png" caption:"Diagram of API/client communication" frame:false %}
+![Diagram of API/client communication](/assets/images/diagram.png)
 
 I've open-sourced the code for the [API](https://github.com/eduardoboucas/signally-server) and [client](https://github.com/eduardoboucas/signally-client), in case you're interested in having a look.
 
@@ -54,7 +54,7 @@ I'm interested in monitoring the builds on my site, which is hosted on Netlify. 
 
 You can see the device in action in the video below. As soon as I start a build, the amber light turns on; it'll then turn green if the build succeeds or red if it fails.
 
-{% include helpers/video-embed.html youtubeId:"9o1FkDqEUCU" width:"560" height:"315" %}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9o1FkDqEUCU" frameBorder="0" allowFullScreen></iframe>
 
 Netlify is just one of a million possible integrations. I had it hooked up to [Travis CI](https://travis-ci.com/) for a while, tracking the build state of a project. You could integrate it with your email provider or Slack account, showing you information about unread emails or direct messages. Maybe you could plug it into your Google Calendar account, to give you an idea of how busy you are for the day.
 
