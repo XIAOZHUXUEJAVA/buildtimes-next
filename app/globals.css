@@ -142,7 +142,9 @@
 
   /* Feature Title 样式 */
   .feature-title {
-    display: inline-block;
+    display: block;
+    width: 100%;
+    text-align: center;
     font-family: "AlternateGothicW01-No3", sans-serif;
     font-size: 95px;
     font-weight: bold;
@@ -260,9 +262,9 @@
   }
 
   .constrain--padding {
-    max-width: calc(1640px + 2 * 35px);
-    padding-left: 35px;
-    padding-right: 35px;
+    max-width: 1700px;
+    padding-left: 30px;
+    padding-right: 30px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -331,8 +333,8 @@
     }
   }
 
-  /* Drop Cap 效果 - 第一个段落的首字母 */
-  .body-text p:first-of-type::first-letter {
+  /* Drop Cap 效果 - 第一个段落的首字母（排除引用文本） */
+  .body-text p:first-of-type:not(blockquote p)::first-letter {
     float: left;
     font-family: "AlternateGothicW01-No3", sans-serif;
     font-size: 130px;
@@ -342,11 +344,21 @@
   }
 
   @media (max-width: 799px) {
-    .body-text p:first-of-type::first-letter {
+    .body-text p:first-of-type:not(blockquote p)::first-letter {
       font-size: 80px;
       line-height: 32px;
       margin: 20px 4px 0px -3px;
     }
+  }
+
+  /* 确保引用文本内的段落不使用 Drop Cap */
+  .body-text blockquote p::first-letter {
+    float: none;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0;
+    font-weight: inherit;
   }
 
   .body-text li p {
@@ -488,8 +500,8 @@
     max-width: 100%;
   }
 
-  /* 引用样式 */
-  .body-text blockquote > p {
+  /* 引用样式 - Pull quote */
+  .body-text :not(blockquote) > blockquote > p {
     font-style: italic;
     text-align: center;
     font-size: 32px;
@@ -498,6 +510,37 @@
     max-width: 700px;
     padding-left: 35px;
     padding-right: 35px;
+  }
+
+  /* 引用样式 - Citations (嵌套引用) */
+  .body-text blockquote > blockquote {
+    max-width: 700px;
+    margin: 35px auto 25px auto;
+    padding: 35px;
+    position: relative;
+    font-style: italic;
+  }
+
+  .body-text blockquote > blockquote > p {
+    background-color: var(--light-grey);
+    padding: 0 20px 20px 20px;
+    margin-bottom: 0;
+    font-style: italic;
+  }
+
+  .body-text blockquote > blockquote > p:first-of-type {
+    padding-top: 40px;
+  }
+
+  .body-text blockquote > blockquote > p:first-of-type::before {
+    content: "\201C";
+    position: absolute;
+    top: -22px;
+    left: 0;
+    font-size: 160px;
+    font-weight: bold;
+    font-family: Times, serif;
+    line-height: 1em;
   }
 
   /* 表格样式 */
