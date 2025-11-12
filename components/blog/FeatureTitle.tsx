@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { generateFeatureTitle } from '@/lib/utils';
+import { useEffect, useRef, useState } from "react";
+import { generateFeatureTitle } from "@/lib/utils";
 
 interface FeatureTitleProps {
   title: string;
   className?: string;
 }
 
-export function FeatureTitle({ title, className = '' }: FeatureTitleProps) {
+export function FeatureTitle({ title, className = "" }: FeatureTitleProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [titleParts, setTitleParts] = useState<string[]>([]);
   const [fontSizes, setFontSizes] = useState<number[]>([]);
@@ -26,16 +26,16 @@ export function FeatureTitle({ title, className = '' }: FeatureTitleProps) {
       const newFontSizes: number[] = [];
 
       titleParts.forEach((part, index) => {
-        const tempSpan = document.createElement('span');
-        tempSpan.style.visibility = 'hidden';
-        tempSpan.style.position = 'absolute';
-        tempSpan.style.fontSize = '100px';
-        tempSpan.style.fontFamily = 'AlternateGothicW01-No3, sans-serif';
-        tempSpan.style.fontWeight = 'bold';
-        tempSpan.style.textTransform = 'uppercase';
-        tempSpan.style.whiteSpace = 'nowrap';
+        const tempSpan = document.createElement("span");
+        tempSpan.style.visibility = "hidden";
+        tempSpan.style.position = "absolute";
+        tempSpan.style.fontSize = "100px";
+        tempSpan.style.fontFamily = "AlternateGothicW01-No3, sans-serif";
+        tempSpan.style.fontWeight = "bold";
+        tempSpan.style.textTransform = "uppercase";
+        tempSpan.style.whiteSpace = "nowrap";
         tempSpan.textContent = part;
-        
+
         document.body.appendChild(tempSpan);
         const textWidth = tempSpan.offsetWidth;
         document.body.removeChild(tempSpan);
@@ -49,21 +49,24 @@ export function FeatureTitle({ title, className = '' }: FeatureTitleProps) {
 
     // 延迟执行以确保字体加载完成
     const timer = setTimeout(adjustFontSizes, 100);
-    window.addEventListener('resize', adjustFontSizes);
+    window.addEventListener("resize", adjustFontSizes);
 
     return () => {
       clearTimeout(timer);
-      window.removeEventListener('resize', adjustFontSizes);
+      window.removeEventListener("resize", adjustFontSizes);
     };
   }, [titleParts]);
 
   return (
-    <div ref={containerRef} className={`feature-title inline-block w-full ${className}`}>
+    <div
+      ref={containerRef}
+      className={`feature-title inline-block w-full ${className}`}
+    >
       {/* 完整标题（移动端显示，桌面端用于 SEO 但不可见） */}
       <span className="feature-title__full block text-[42px] font-secondary font-bold uppercase md:hidden">
         {title}
       </span>
-      
+
       {/* SEO 用的隐藏标题（桌面端） */}
       <span className="hidden md:block md:text-[0] md:leading-[0] md:h-0 md:overflow-hidden">
         {title}
@@ -75,14 +78,14 @@ export function FeatureTitle({ title, className = '' }: FeatureTitleProps) {
           <span
             key={index}
             aria-hidden="true"
-            className="feature-title__part block whitespace-nowrap uppercase"
+            className="feature-title__part inline-block whitespace-nowrap uppercase"
             style={{
-              fontSize: fontSizes[index] ? `${fontSizes[index] * 1.15}%` : '138px',
-              lineHeight: '1.1',
+              fontSize: fontSizes[index] ? `${fontSizes[index]}%` : "120px",
+              lineHeight: "0.78",
               opacity: fontSizes[index] ? 1 : 0,
-              fontFamily: 'AlternateGothicW01-No3, sans-serif',
-              fontWeight: '500',
-              transition: 'opacity 0.3s ease-out',
+              fontFamily: "AlternateGothicW01-No3, sans-serif",
+              fontWeight: "bold",
+              transition: "opacity 0.3s ease-out",
             }}
           >
             {part}

@@ -1,33 +1,54 @@
 @import "tailwindcss";
 
 @layer base {
-  /* Custom Font - AlternateGothicW01-No3 */
+  /* Custom Font - AlternateGothicW01-No3 (完全复刻原项目) */
   @font-face {
     font-family: "AlternateGothicW01-No3";
-    src: url("/assets/fonts/836ee743-8a38-45fb-8076-f78de89ed923.woff2") format("woff2"),
-      url("/assets/fonts/6e86a433-85a2-40a6-8dc7-58cc16a6cb9b.woff") format("woff"),
-      url("/assets/fonts/72fb6a94-41e4-4db6-b19b-88ad54f05d97.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
+    src: url("/assets/fonts/d204d256-fb7f-488b-a5f2-57979585e00a.eot?#iefix");
+    src:
+      url("/assets/fonts/d204d256-fb7f-488b-a5f2-57979585e00a.eot?#iefix")
+        format("eot"),
+      url("/assets/fonts/836ee743-8a38-45fb-8076-f78de89ed923.woff2")
+        format("woff2"),
+      url("/assets/fonts/6e86a433-85a2-40a6-8dc7-58cc16a6cb9b.woff")
+        format("woff"),
+      url("/assets/fonts/72fb6a94-41e4-4db6-b19b-88ad54f05d97.ttf")
+        format("truetype"),
+      url("/assets/fonts/e3670e54-4d1a-499a-a84b-cf19198f20a5.svg#e3670e54-4d1a-499a-a84b-cf19198f20a5")
+        format("svg");
     font-display: swap;
-  }
-  
-  /* 如果字体加载失败，使用备用字体 */
-  @font-face {
-    font-family: "AlternateGothicW01-No3";
-    src: local("Arial Black"), local("Arial-Black");
-    font-weight: bold;
-    font-style: normal;
   }
 }
 
 @layer base {
+  /* 字体类 - 确保正确应用 */
+  .font-primary {
+    font-family: Times, serif;
+  }
+
+  .font-secondary {
+    font-family: "AlternateGothicW01-No3", sans-serif;
+  }
+
+  .font-tertiary {
+    font-family: Helvetica, sans-serif;
+  }
+
+  .font-brand {
+    font-family: "Playfair Display", Times, serif;
+  }
+
+  /* 字母间距变化 */
+  .tracking-variation {
+    letter-spacing: 3px;
+  }
+
   /* CSS Variables - 原项目颜色系统 */
   :root {
     --background: #fffff5;
     --foreground: #000;
     --primary: #000;
-    --secondary: #F76C5E;
+    --secondary: #f76c5e;
     --light-grey: #eeeee5;
     --dark-grey: #222222;
     --error: tomato;
@@ -123,38 +144,40 @@
   .feature-title {
     display: inline-block;
     font-family: "AlternateGothicW01-No3", sans-serif;
-    font-size: 120px;
-    font-weight: normal;
+    font-size: 95px;
+    font-weight: bold;
   }
-  
+
   .feature-title__full {
     display: block;
     font-family: "AlternateGothicW01-No3", sans-serif;
-    font-weight: normal;
+    font-weight: bold;
   }
-  
+
   @media (min-width: 800px) {
     .feature-title__full {
       font-size: 0;
       line-height: 0;
     }
   }
-  
+
   .feature-title__part {
     display: inline-block;
     white-space: nowrap;
     text-transform: uppercase;
-    line-height: 1.1;
+    line-height: 0.78;
     font-family: "AlternateGothicW01-No3", sans-serif;
-    font-weight: normal;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
   }
-  
+
   @media (max-width: 799px) {
     .feature-title__part {
       display: none !important;
     }
   }
-  
+
   /* Feature Title Animation */
   @keyframes fadeInFeatureTitle {
     from {
@@ -171,7 +194,7 @@
   .responsive-font {
     font-size: clamp(var(--min-size), var(--responsive-size), var(--max-size));
   }
-  
+
   /* Column utilities for featured posts */
   .columns-2 {
     column-count: 2;
@@ -188,40 +211,40 @@
     width: 100%;
     height: 100%;
   }
-  
+
   .masthead-bar__search-input:focus {
     background-color: var(--light-grey);
   }
-  
+
   /* Post 样式 */
   .post__title {
     line-height: 1.2;
   }
-  
+
   /* 文章正文样式 - 完全复刻原版 */
   .post__body {
     overflow-wrap: break-word;
     word-wrap: break-word;
   }
-  
+
   .post__body p {
     margin-bottom: 25px;
   }
-  
+
   @media (min-width: 800px) {
     .post__body p {
       text-align: justify;
     }
   }
-  
+
   .post__body strong {
     font-weight: 700;
   }
-  
+
   .post__body em {
     font-style: italic;
   }
-  
+
   .post__body h2 {
     font-family: "Playfair Display", Times, serif;
     font-size: 32px;
@@ -232,7 +255,7 @@
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   .post__body h3 {
     font-family: "Playfair Display", Times, serif;
     font-size: 24px;
@@ -243,7 +266,7 @@
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   .post__body ul,
   .post__body ol {
     margin-bottom: 25px;
@@ -254,29 +277,29 @@
     padding-left: 35px;
     padding-right: 35px;
   }
-  
+
   .post__body ul {
     list-style-type: disc;
   }
-  
+
   .post__body ol {
     list-style-type: decimal;
   }
-  
+
   .post__body li + li {
     margin-top: 15px;
   }
-  
+
   .post__body a {
     color: inherit;
     text-decoration: underline;
     transition: opacity 0.2s ease-out;
   }
-  
+
   .post__body a:hover {
     opacity: 0.6;
   }
-  
+
   .post__body blockquote {
     max-width: 700px;
     margin-left: auto;
@@ -290,25 +313,25 @@
     margin-top: 75px;
     margin-bottom: 25px;
   }
-  
+
   .post__body img {
     display: block;
     margin: 0 auto;
     max-width: 100%;
   }
-  
+
   /* Masonry Grid 样式 */
   .masonry-grid {
     display: flex;
     margin-left: 0;
     width: auto;
   }
-  
+
   .masonry-grid_column {
     padding-left: 0;
     background-clip: padding-box;
   }
-  
+
   .masonry-grid_column > * {
     margin-bottom: 0;
   }
