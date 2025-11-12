@@ -1,17 +1,25 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, X } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { SearchResults } from './SearchResults';
 
 export function Masthead() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearchToggle = () => {
-    setSearchOpen(!searchOpen);
-    if (!searchOpen) {
+    const newState = !searchOpen;
+    setSearchOpen(newState);
+    
+    // 触发自定义事件通知其他组件
+    window.dispatchEvent(new CustomEvent('searchStateChange', { 
+      detail: { isOpen: newState } 
+    }));
+    
+    if (newState) {
       setTimeout(() => {
         document.getElementById('search-input')?.focus();
       }, 500);
@@ -27,7 +35,24 @@ export function Masthead() {
     }
   };
 
+  // 全局 ESC 键监听
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && searchOpen) {
+        setSearchOpen(false);
+        setSearchQuery('');
+        window.dispatchEvent(new CustomEvent('searchStateChange', { 
+          detail: { isOpen: false } 
+        }));
+      }
+    };
+
+    window.addEventListener('keyup', handleEscape);
+    return () => window.removeEventListener('keyup', handleEscape);
+  }, [searchOpen]);
+
   return (
+    <>
     <header className="masthead relative z-2 bg-background text-center overflow-hidden w-full flex-shrink-0 px-[30px]" style={{ maxWidth: '1700px', margin: '0 auto' }}>
       <div className="masthead__wrapper">
         {/* Logo and Title */}
@@ -74,11 +99,11 @@ export function Masthead() {
               
               <button
                 onClick={handleSearchToggle}
-                className="masthead-bar__open-search-button absolute top-0 right-0 h-full px-4 hover:opacity-60 transition-opacity"
+                className="masthead-bar__open-search-button search-button absolute top-0 right-0 h-full px-4 cursor-pointer group"
                 aria-label="Open search"
               >
-                <Search className="w-4 h-4 inline" />
-                <span className="hidden md:inline ml-2 text-xs font-bold uppercase">Search</span>
+                <Search className="search-button__icon w-5 h-5 inline align-middle transition-transform duration-100 group-hover:scale-110" />
+                <span className="search-button__label hidden md:inline ml-2 text-sm align-middle normal-case">Search</span>
               </button>
             </div>
           </div>
@@ -112,15 +137,11 @@ export function Masthead() {
           </div>
         </div>
 
-        {/* Search Results (will be implemented separately) */}
-        {searchOpen && searchQuery && (
-          <div className="search-results absolute top-full left-0 right-0 bg-background border-b border-foreground max-h-[400px] overflow-y-auto z-10">
-            <div className="p-4">
-              <p className="text-sm text-center">Search functionality coming soon...</p>
-            </div>
-          </div>
-        )}
       </div>
     </header>
+    
+    {/* Search Results - 渲染在 header 外部 */}
+    <SearchResults query={searchQuery} isOpen={searchOpen} />
+    </>
   );
 }

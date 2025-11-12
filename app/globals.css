@@ -216,6 +216,37 @@
     background-color: var(--light-grey);
   }
 
+  /* Search Button 动效 */
+  .search-button {
+    cursor: pointer;
+  }
+
+  .search-button__icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    transform-origin: center;
+    vertical-align: middle;
+    transition: transform 100ms ease-out;
+  }
+
+  .search-button:hover .search-button__icon {
+    transform: scale(1.1);
+  }
+
+  .search-button__label {
+    display: none;
+    text-transform: none;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  @media (min-width: 800px) {
+    .search-button__label {
+      display: inline;
+    }
+  }
+
   /* Post 样式 */
   .post__title {
     line-height: 1.2;
@@ -320,16 +351,84 @@
     max-width: 100%;
   }
 
+  /* Main 内容区域动效 */
+  .main {
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    flex: 1 0 auto;
+    margin-top: 25px;
+    min-height: 100vh;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .main--hidden {
+    transform: translateY(-80px);
+    opacity: 0;
+  }
+
+  /* Search Results 动效 */
+  .search-results {
+    transition: max-height 0s linear 0s, opacity 0.2s ease-out 0s;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+
+  .search-results--visible {
+    max-height: 15000px;
+    opacity: 1;
+    transition: max-height 0s linear 0.3s, opacity 0.2s ease-out 0.35s;
+  }
+
+  /* Small Card 样式 */
+  .small-card {
+    display: block;
+    padding: 20px;
+    background-color: var(--light-grey);
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  }
+
+  @media (min-width: 800px) {
+    .small-card {
+      display: inline-block;
+    }
+  }
+
+  .small-card:hover {
+    transform: translateY(-3px);
+    opacity: 0.6;
+  }
+
+  .small-card__pre {
+    font-size: 13px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .small-card__title {
+    font-weight: bold;
+  }
+
+  /* Search Result 样式 */
+  .search-result {
+    margin: 20px;
+  }
+
+  @media (min-width: 800px) {
+    .search-result {
+      margin: 20px 10px 10px 20px;
+    }
+  }
+
   /* Masonry Grid 样式 */
   .masonry-grid {
     display: flex;
-    margin-left: 0;
+    margin-left: -30px;
     width: auto;
   }
 
   .masonry-grid_column {
-    padding-left: 0;
-    background-clip: padding-box;
+    padding-left: 30px;
   }
 
   .masonry-grid_column > * {
