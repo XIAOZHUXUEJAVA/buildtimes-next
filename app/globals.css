@@ -252,39 +252,271 @@
     line-height: 1.2;
   }
 
+  /* Constrain 样式 */
+  .constrain {
+    max-width: 1640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .constrain--padding {
+    max-width: calc(1640px + 2 * 35px);
+    padding-left: 35px;
+    padding-right: 35px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Post--full 样式 */
+  .post--full .constrain {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* Post Meta 样式 */
+  .post__meta {
+    text-align: center;
+  }
+
+  @media (min-width: 800px) {
+    .post__meta {
+      margin-top: 20px;
+    }
+  }
+
+  .post-meta--emphasis {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 35px;
+    font-family: Times, serif;
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .post-meta--emphasis a {
+    text-decoration: underline;
+    transition: opacity 0.2s ease-out;
+  }
+
+  .post-meta--emphasis a:hover {
+    opacity: 0.6;
+  }
+
   /* 文章正文样式 - 完全复刻原版 */
   .post__body {
     overflow-wrap: break-word;
     word-wrap: break-word;
   }
 
-  .post__body p {
+  /* Body-text 样式 */
+  .body-text p,
+  .body-text li,
+  .body-text details {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 35px;
+    padding-right: 35px;
+    font-size: 20px;
+    line-height: 1.6;
     margin-bottom: 25px;
   }
 
   @media (min-width: 800px) {
-    .post__body p {
+    .body-text p,
+    .body-text li,
+    .body-text details {
+      font-size: 24px;
       text-align: justify;
     }
   }
 
-  .post__body strong {
-    font-weight: 700;
+  /* Drop Cap 效果 - 第一个段落的首字母 */
+  .body-text p:first-of-type::first-letter {
+    float: left;
+    font-family: "AlternateGothicW01-No3", sans-serif;
+    font-size: 130px;
+    line-height: 53px;
+    margin: 33px 6px 0px -5px;
+    font-weight: normal;
   }
 
-  .post__body em {
+  @media (max-width: 799px) {
+    .body-text p:first-of-type::first-letter {
+      font-size: 80px;
+      line-height: 32px;
+      margin: 20px 4px 0px -3px;
+    }
+  }
+
+  .body-text li p {
+    display: inline;
+    padding: 0;
+    margin-bottom: 0;
+  }
+
+  .body-text li ol,
+  .body-text li ul {
+    margin-top: 15px;
+  }
+
+  .body-text li + li {
+    margin-top: 15px;
+  }
+
+  .body-text strong {
+    font-weight: bold;
+  }
+
+  .body-text em {
     font-style: italic;
   }
 
-  .post__body h2 {
+  .body-text a {
+    text-decoration: underline;
+    transition: opacity 0.2s ease-out;
+  }
+
+  .body-text a:hover {
+    opacity: 0.6;
+  }
+
+  .body-text ul {
+    list-style-type: disc;
+    list-style-position: inside;
+  }
+
+  .body-text ol {
+    list-style-type: decimal;
+    list-style-position: inside;
+  }
+
+  /* Preface 样式 */
+  .preface {
+    max-width: 700px;
+    margin: 0 auto 25px auto;
+    padding: 35px;
+    background-color: var(--light-grey);
+  }
+
+  .preface p {
+    margin-bottom: 15px;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 800px) {
+    .preface p {
+      font-size: 24px;
+    }
+  }
+
+  .preface ul {
+    margin-left: 20px;
+  }
+
+  .preface li {
+    margin-bottom: 8px;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 800px) {
+    .preface li {
+      font-size: 24px;
+    }
+  }
+
+  /* Audio Player 样式 */
+  .audio-player {
+    margin-bottom: 25px;
+  }
+
+  .audio-player__inner {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 35px;
+    background-color: var(--light-grey);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .audio-player__icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .audio-player__label {
+    font-size: 16px;
+  }
+
+  /* 文章内容标题样式 */
+  .body-text h2 {
     font-family: "Playfair Display", Times, serif;
     font-size: 32px;
     font-weight: 700;
-    margin-top: 45px;
-    margin-bottom: 15px;
     max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 45px auto 15px auto;
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
+  .body-text h3 {
+    font-family: "Playfair Display", Times, serif;
+    font-size: 24px;
+    font-weight: 700;
+    max-width: 700px;
+    margin: 45px auto 15px auto;
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
+  /* 代码样式 */
+  .body-text li code,
+  .body-text p code {
+    font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+    background-color: var(--light-grey);
+    font-size: 0.75em;
+    padding: 5px 8px;
+  }
+
+  /* 图片样式 */
+  .body-text img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+
+  /* 引用样式 */
+  .body-text blockquote > p {
+    font-style: italic;
+    text-align: center;
+    font-size: 32px;
+    border-left: 2px solid black;
+    margin: 75px auto;
+    max-width: 700px;
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
+  /* 表格样式 */
+  .body-text table {
+    max-width: 700px;
+    margin: 0 auto 25px auto;
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
+  .body-text th {
+    font-weight: bold;
+  }
+
+  .body-text td,
+  .body-text th {
+    background-color: var(--light-grey);
+    border: 3px solid var(--background);
+    padding: 10px;
   }
 
   .post__body h3 {

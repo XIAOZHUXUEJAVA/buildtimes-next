@@ -10,7 +10,7 @@ tags:
 ---
 Picking the technology stack for a project is an important and consequential decision. In the enterprise space in particular, it often involves a multi-year commitment with long-lasting implications on the roadmap of the project, the pace of its development, the quality of the deliverables, and even the ability to assemble and maintain a happy team.
 
-The open-source software model is a fundamental answer to this.<!--more--> By using software that is developed in the open, anyone is free to extend it or modify it in whatever way fits their use case. More crucially, the portability of open-source software gives developers and organisations the freedom to move their infrastructure between different providers without fear of getting locked in to a specific vendor.
+The open-source software model is a fundamental answer to this. By using software that is developed in the open, anyone is free to extend it or modify it in whatever way fits their use case. More crucially, the portability of open-source software gives developers and organisations the freedom to move their infrastructure between different providers without fear of getting locked in to a specific vendor.
 
 This is the expectation with Next.js, an open-source web development framework created and [governed by Vercel](https://nextjs.org/governance), a cloud provider that offers managed hosting of Next.js as a service.
 
@@ -158,7 +158,7 @@ The incentive is that they _have_ to do those things if they choose to publish t
 
 It's not my business to say which framework you should use. If you like Next.js and you still think it's the best tool for the problem you need to solve, you should absolutely use it. But I hope that this information helps you feel more confident about your decision, whichever way you're leaning.
 
-As for me, I'll keep doing my job to help support the developers who chose to deploy their sites to Netlify, whatever their framework of choice is. And competition aside, I'm genuinely looking forward to help Vercel make Next.js more open and interoperable through the OpenNext movement.<!--tomb-->
+As for me, I'll keep doing my job to help support the developers who chose to deploy their sites to Netlify, whatever their framework of choice is. And competition aside, I'm genuinely looking forward to help Vercel make Next.js more open and interoperable through the OpenNext movement.
 
 *Update (March 26th):* Added [a note](#update-1) about Vercel's most recent postmortem.
 

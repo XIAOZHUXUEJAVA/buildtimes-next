@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: ["class"],
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -82,8 +82,10 @@ const config: Config = {
       
       // 最大宽度
       maxWidth: {
-        "post-body": "700px",
-        layout: "1640px",
+        'layout': '1640px',
+        'post-body': '800px',
+        'post-content': '800px',
+        'masthead': '1700px',
       },
       
       // 边框圆角

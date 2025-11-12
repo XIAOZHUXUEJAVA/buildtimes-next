@@ -58,17 +58,9 @@ export function FeatureTitle({ title, className = "" }: FeatureTitleProps) {
   }, [titleParts]);
 
   return (
-    <div
-      ref={containerRef}
-      className={`feature-title inline-block w-full ${className}`}
-    >
-      {/* 完整标题（移动端显示，桌面端用于 SEO 但不可见） */}
-      <span className="feature-title__full block text-[42px] font-secondary font-bold uppercase md:hidden">
-        {title}
-      </span>
-
-      {/* SEO 用的隐藏标题（桌面端） */}
-      <span className="hidden md:block md:text-[0] md:leading-[0] md:h-0 md:overflow-hidden">
+    <div ref={containerRef} className={`feature-title ${className}`}>
+      {/* 完整标题（移动端显示，桌面端隐藏但存在） */}
+      <span className="feature-title__full block md:text-[0] md:leading-[0]">
         {title}
       </span>
 
