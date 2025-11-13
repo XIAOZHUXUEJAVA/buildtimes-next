@@ -1,6 +1,6 @@
 import { getPaginatedPosts } from '@/lib/posts';
-import { MasonryGrid } from '@/components/blog/MasonryGrid';
-import Link from 'next/link';
+import { LoadMorePosts } from '@/components/blog/LoadMorePosts';
+import { MainContent } from '@/components/layout/MainContent';
 import { notFound } from 'next/navigation';
 
 export async function generateStaticParams() {
@@ -29,40 +29,31 @@ export default async function PaginatedPage({ params }: { params: Promise<{ numb
     notFound();
   }
 
-  const { posts, totalPages, hasNext, hasPrevious } = getPaginatedPosts(pageNumber, 15);
+  // 获取从第1页到当前页的所有文章，模拟原项目的填充行为
+  const allPosts = [];
+  let currentHasNext = false;
+  
+  for (let i = 1; i <= pageNumber; i++) {
+    const { posts, hasNext } = getPaginatedPosts(i, 15);
+    allPosts.push(...posts);
+    if (i === pageNumber) {
+      currentHasNext = hasNext;
+    }
+  }
 
-  if (posts.length === 0) {
+  if (allPosts.length === 0) {
     notFound();
   }
 
   return (
-    <div className="main main--homepage max-w-layout mx-auto px-layout-side py-8">
-      <MasonryGrid posts={posts} />
-
-      {/* Pagination Controls */}
-      <div className="paginator mt-12 flex justify-center gap-4">
-        {hasPrevious && (
-          <Link
-            href={pageNumber === 2 ? '/' : `/page/${pageNumber - 1}`}
-            className="cta inline-block px-4 py-3 border border-foreground text-sm font-bold uppercase hover:bg-foreground hover:text-background transition-colors"
-          >
-            ← Previous
-          </Link>
-        )}
-        
-        <span className="inline-flex items-center px-4 text-sm">
-          Page {pageNumber} of {totalPages}
-        </span>
-
-        {hasNext && (
-          <Link
-            href={`/page/${pageNumber + 1}`}
-            className="cta inline-block px-4 py-3 border border-foreground text-sm font-bold uppercase hover:bg-foreground hover:text-background transition-colors"
-          >
-            Next →
-          </Link>
-        )}
-      </div>
-    </div>
+    <MainContent className="main--homepage flex-1 mt-post-rhythm min-h-screen overflow-hidden w-full" style={{ maxWidth: 'calc(1640px + 2 * 30px + 12px)', margin: '25px auto 0' } as any}>
+      <LoadMorePosts 
+        initialPosts={allPosts}
+        initialHasMore={currentHasNext}
+        initialPage={pageNumber}
+        featuredOffset={0}
+        featuredInterval={5}
+      />
+    </MainContent>
   );
 }

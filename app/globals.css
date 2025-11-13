@@ -501,15 +501,38 @@
   }
 
   /* 引用样式 - Pull quote */
-  .body-text :not(blockquote) > blockquote > p {
-    font-style: italic;
-    text-align: center;
-    font-size: 32px;
-    border-left: 2px solid black;
-    margin: 75px auto;
+  .body-text :not(blockquote) > blockquote,
+  .post__content :not(blockquote) > blockquote,
+  .post__body :not(blockquote) > blockquote,
+  article :not(blockquote) > blockquote,
+  blockquote:not(blockquote blockquote) {
     max-width: 700px;
+    margin: 75px auto;
+  }
+
+  .body-text :not(blockquote) > blockquote > p,
+  .post__content :not(blockquote) > blockquote > p,
+  .post__body :not(blockquote) > blockquote > p,
+  article :not(blockquote) > blockquote > p {
+    font-style: italic !important;
+    text-align: center !important;
+    font-size: 32px !important;
+    border-left: 2px solid black;
     padding-left: 35px;
     padding-right: 35px;
+    margin: 0 !important;
+    max-width: none;
+  }
+
+  /* 更通用的 blockquote 样式 - 确保所有直接 blockquote 都有正确样式 */
+  blockquote:not(blockquote blockquote) > p {
+    font-style: italic !important;
+    text-align: center !important;
+    font-size: 32px !important;
+    border-left: 2px solid black;
+    padding-left: 35px;
+    padding-right: 35px;
+    margin: 0 !important;
   }
 
   /* 引用样式 - Citations (嵌套引用) */
@@ -631,14 +654,28 @@
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
     flex: 1 0 auto;
     margin-top: 25px;
-    min-height: 100vh;
-    overflow: hidden;
-    width: 100%;
   }
 
-  .main--hidden {
-    transform: translateY(-80px);
-    opacity: 0;
+  /* Post transition effects - 复刻原项目的文章过渡动画 */
+  .js-post {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  a > .js-post:hover {
+    transform: translateY(-3px);
+    opacity: 0.6;
+  }
+
+  /* Masonry 布局过渡效果 - 匹配原项目的 stagger 填充效果 */
+  .js-posts {
+    transition: height 0.2s ease;
+  }
+
+  .js-posts .js-post {
+    /* 初始状态为可见，避免闪烁 */
+    opacity: 1;
+    transform: scale(1);
+    /* 过渡效果将通过 JavaScript 动态设置 */
   }
 
   /* Search Results 动效 */
@@ -708,5 +745,72 @@
 
   .masonry-grid_column > * {
     margin-bottom: 0;
+  }
+
+  /* CTA Button Styles - 完美复刻原项目 */
+  .cta {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 0;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease-out, color 0.3s ease-out, transform 0.3s ease-out;
+    text-decoration: none;
+  }
+
+  .cta:hover {
+    background-color: black;
+    color: white;
+  }
+
+  .cta--progress::before {
+    position: absolute;
+    content: '...';
+    background-color: var(--background);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    line-height: 30px;
+    font-size: 1.5em;
+    letter-spacing: 3px;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Paginator Styles - 完美复刻原项目 */
+  .paginator {
+    max-width: calc(1640px + 2 * 30px + 12px);
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .paginator__inner {
+    position: relative;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .paginator__inner::before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px solid black;
+    z-index: -1;
+  }
+
+  .paginator__button-wrapper {
+    display: inline-block;
+    padding: 0 10px;
+    background-color: var(--background);
   }
 }
