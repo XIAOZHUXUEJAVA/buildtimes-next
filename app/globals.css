@@ -154,11 +154,20 @@
     display: block;
     font-family: "AlternateGothicW01-No3", sans-serif;
     font-weight: bold;
+    font-size: 32px; /* 小屏幕 */
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 480px) {
+    .feature-title__full {
+      font-size: 48px; /* 中等屏幕 */
+    }
   }
 
   @media (min-width: 800px) {
     .feature-title__full {
-      font-size: 0;
+      font-size: 0; /* 桌面端隐藏，使用动态大小的 parts */
       line-height: 0;
     }
   }

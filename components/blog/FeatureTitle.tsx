@@ -40,7 +40,11 @@ export function FeatureTitle({ title, className = "" }: FeatureTitleProps) {
         const textWidth = tempSpan.offsetWidth;
         document.body.removeChild(tempSpan);
 
-        const fontSize = Math.floor((containerWidth / textWidth) * 100);
+        const calculatedFontSize = Math.floor((containerWidth / textWidth) * 100);
+        // 限制字体大小范围，避免过大或过小
+        const minFontSize = 60; // 最小 60px
+        const maxFontSize = 120; // 最大 120px，匹配原项目
+        const fontSize = Math.max(minFontSize, Math.min(maxFontSize, calculatedFontSize));
         newFontSizes[index] = fontSize;
       });
 
