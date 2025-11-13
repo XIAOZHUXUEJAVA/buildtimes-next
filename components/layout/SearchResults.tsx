@@ -22,6 +22,14 @@ export function SearchResults({ query, isOpen }: SearchResultsProps) {
   const [allPosts, setAllPosts] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // 处理搜索结果点击
+  const handleResultClick = () => {
+    // 触发搜索关闭事件
+    window.dispatchEvent(new CustomEvent('searchStateChange', { 
+      detail: { isOpen: false } 
+    }));
+  };
+
   // 加载所有文章数据
   useEffect(() => {
     fetch('/api/search')
@@ -65,6 +73,7 @@ export function SearchResults({ query, isOpen }: SearchResultsProps) {
             <Link
               key={index}
               href={result.url}
+              onClick={handleResultClick}
               className="search-result small-card block md:inline-block p-5 bg-light-grey transition-all duration-200 hover:-translate-y-[3px] hover:opacity-60 m-5 md:mx-[10px] md:my-[10px] md:ml-5"
             >
               <p className="small-card__pre text-[13px] uppercase mb-[10px]">

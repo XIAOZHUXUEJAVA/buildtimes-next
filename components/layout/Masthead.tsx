@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SearchResults } from './SearchResults';
@@ -9,6 +10,13 @@ import { SearchResults } from './SearchResults';
 export function Masthead() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const pathname = usePathname();
+
+  // 路由变化时关闭搜索
+  useEffect(() => {
+    setSearchOpen(false);
+    setSearchQuery('');
+  }, [pathname]);
 
   const handleSearchToggle = () => {
     const newState = !searchOpen;
@@ -35,7 +43,7 @@ export function Masthead() {
     }
   };
 
-  // 全局 ESC 键监听
+  // 全局 ESC 键监听和搜索状态变化监听
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && searchOpen) {
@@ -47,8 +55,21 @@ export function Masthead() {
       }
     };
 
+    const handleSearchStateChange = (e: CustomEvent) => {
+      const { isOpen } = e.detail;
+      setSearchOpen(isOpen);
+      if (!isOpen) {
+        setSearchQuery('');
+      }
+    };
+
     window.addEventListener('keyup', handleEscape);
-    return () => window.removeEventListener('keyup', handleEscape);
+    window.addEventListener('searchStateChange', handleSearchStateChange as EventListener);
+    
+    return () => {
+      window.removeEventListener('keyup', handleEscape);
+      window.removeEventListener('searchStateChange', handleSearchStateChange as EventListener);
+    };
   }, [searchOpen]);
 
   return (
