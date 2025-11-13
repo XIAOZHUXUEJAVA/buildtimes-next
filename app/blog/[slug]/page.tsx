@@ -8,6 +8,7 @@ import { MainContent } from '@/components/layout/MainContent';
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypePrettyCode from 'rehype-pretty-code';
 import Link from 'next/link';
 
 export async function generateStaticParams() {
@@ -147,6 +148,11 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                     rehypePlugins: [
                       rehypeSlug,
                       [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+                      [rehypePrettyCode, {
+                        theme: 'github-light',
+                        keepBackground: false,
+                        defaultLang: 'text',
+                      }],
                     ],
                   },
                 }}
