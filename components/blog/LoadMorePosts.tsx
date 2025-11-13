@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { PostMeta } from '@/lib/posts';
+import { useState, useEffect, useRef } from 'react';
 import { PostCard } from './PostCard';
+import { PostMeta } from '@/lib/posts';
 
 interface LoadMorePostsProps {
   initialPosts: PostMeta[];
@@ -23,6 +23,7 @@ export function LoadMorePosts({
   const [page, setPage] = useState(initialPage);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(initialHasMore);
+  const [searchOpen, setSearchOpen] = useState(false);
   const gridRef = useRef<HTMLDivElement>(null);
   const masonryInstance = useRef<any>(null);
 
@@ -62,6 +63,20 @@ export function LoadMorePosts({
       if (masonryInstance.current) {
         masonryInstance.current.destroy();
       }
+    };
+  }, []);
+
+  // 监听搜索状态变化
+  useEffect(() => {
+    const handleSearchStateChange = (e: CustomEvent) => {
+      const { isOpen } = e.detail;
+      setSearchOpen(isOpen);
+    };
+
+    window.addEventListener('searchStateChange', handleSearchStateChange as EventListener);
+    
+    return () => {
+      window.removeEventListener('searchStateChange', handleSearchStateChange as EventListener);
     };
   }, []);
 
@@ -139,7 +154,9 @@ export function LoadMorePosts({
 
   return (
     <>
-      <div className="js-posts-wrapper">
+      <div className={`js-posts-wrapper transition-all duration-500 ease-out ${
+        searchOpen ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
+      }`}>
         {/* Headline 文章 - 占据全宽 */}
         {headlinePost && (
           <PostCard
@@ -174,7 +191,9 @@ export function LoadMorePosts({
 
       {/* Load More Button - 完美复刻原项目结构 */}
       {hasMore && (
-        <div className="js-paginator paginator">
+        <div className={`js-paginator paginator transition-all duration-500 ease-out ${
+          searchOpen ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
+        }`}>
           <div className="paginator__inner">
             <div className="paginator__button-wrapper">
               <button

@@ -5,6 +5,7 @@ import { formatDate } from '@/lib/utils';
 import { PostNavigation } from '@/components/blog/PostNavigation';
 import { FeatureTitle } from '@/components/blog/FeatureTitle';
 import { MainContent } from '@/components/layout/MainContent';
+import { SearchHideWrapper } from '@/components/blog/SearchHideWrapper';
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -46,10 +47,13 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   return (
     <>
       {/* 文章导航 */}
-      <PostNavigation previous={post.previous} next={post.next} />
+      <SearchHideWrapper>
+        <PostNavigation previous={post.previous} next={post.next} />
+      </SearchHideWrapper>
 
       <MainContent className="main">
-        <article className="post post--full">
+        <SearchHideWrapper>
+          <article className="post post--full">
           {/* 标题区域 - 使用 constrain--padding */}
           <div className="constrain--padding">
             <FeatureTitle title={post.title} className="post__title" />
@@ -160,6 +164,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             </div>
           </div>
         </article>
+        </SearchHideWrapper>
       </MainContent>
     </>
   );

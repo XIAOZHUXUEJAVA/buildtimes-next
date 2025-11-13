@@ -698,6 +698,18 @@
 
   .js-posts .js-post {
     /* 让 Masonry 完全控制动画 */
+    position: relative;
+  }
+
+  /* 搜索时主页内容隐藏动画 */
+  .js-posts-wrapper {
+    transform-origin: center top;
+  }
+
+  .js-posts-wrapper.search-hidden {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+    pointer-events: none;
   }
 
   /* Search Results 动效 */
