@@ -58,10 +58,14 @@ export function getAllPosts(): PostMeta[] {
         // 生成摘要（复刻原项目逻辑）
         const excerpt = data.excerpt || stripTags(createExcerpt(content, 200).replace(/\n/g, ''), ['code', 'em', 'strong']);
 
+        // 从文件名中提取日期作为备用方案
+        const dateFromFilename = slug.match(/^(\d{4}-\d{2}-\d{2})/)?.[1];
+        const postDate = data.date || (dateFromFilename ? `${dateFromFilename}T00:00:00.000Z` : new Date().toISOString());
+
         return {
           slug,
           title: data.title || 'Untitled',
-          date: data.date || new Date().toISOString(),
+          date: postDate,
           tags: Array.isArray(data.tags) ? data.tags : [],
           excerpt,
           series: data.series,
@@ -94,12 +98,16 @@ export function getPostBySlug(slug: string): Post | null {
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
 
+    // 从文件名中提取日期作为备用方案
+    const dateFromFilename = slug.match(/^(\d{4}-\d{2}-\d{2})/)?.[1];
+    const postDate = data.date || (dateFromFilename ? `${dateFromFilename}T00:00:00.000Z` : new Date().toISOString());
+
     return {
       slug,
       content,
       rawContent: content,
       title: data.title,
-      date: data.date,
+      date: postDate,
       tags: data.tags || [],
       excerpt: data.excerpt || '',
       series: data.series,

@@ -6,11 +6,22 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatDate(date: string): string {
-  return new Date(date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  try {
+    const dateObj = new Date(date);
+    // 检查日期是否有效
+    if (isNaN(dateObj.getTime())) {
+      console.warn('Invalid date:', date);
+      return 'Invalid Date';
+    }
+    return dateObj.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  } catch (error) {
+    console.error('Error formatting date:', date, error);
+    return 'Invalid Date';
+  }
 }
 
 // 创建文章摘要（复刻原项目逻辑）
