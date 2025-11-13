@@ -37,65 +37,35 @@ export function LoadMorePosts({
         itemSelector: '.js-post',
         columnWidth: '.js-post-pivot',
         horizontalOrder: false,
+        stagger: '0.04s',
         transitionDuration: '0.2s',
+        // 优化性能设置
         resize: true,
         initLayout: true,
-      } as any); // 使用 any 类型避免 stagger 的 TypeScript 错误
+        percentPosition: false, // 使用像素位置而不是百分比，性能更好
+      } as any);
     };
 
-    // 延迟初始化以确保 DOM 已渲染
-    const timer = setTimeout(initMasonry, 100);
+    // 使用 requestAnimationFrame 进行初始化，更流畅
+    let rafId: number;
+    const scheduleInit = () => {
+      rafId = requestAnimationFrame(() => {
+        initMasonry();
+      });
+    };
+    scheduleInit();
 
     return () => {
-      clearTimeout(timer);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
       if (masonryInstance.current) {
         masonryInstance.current.destroy();
       }
     };
   }, []);
 
-  // 跟踪之前的文章数量以检测新添加的文章
-  const [previousPostsLength, setPreviousPostsLength] = useState(initialPosts.length);
-
-  // 当文章列表更新时重新布局 - 实现 stagger 填充效果
-  useEffect(() => {
-    if (masonryInstance.current && posts.length > previousPostsLength) {
-      setTimeout(() => {
-        // 获取所有文章元素
-        const allItems = gridRef.current?.querySelectorAll('.js-post');
-        if (allItems && allItems.length > 0) {
-          // 获取新添加的元素
-          const newItemsCount = posts.length - previousPostsLength;
-          const newItems = Array.from(allItems).slice(-newItemsCount);
-          
-          if (newItems.length > 0) {
-            // 先隐藏新元素
-            newItems.forEach((item, index) => {
-              const element = item as HTMLElement;
-              element.style.opacity = '0';
-              element.style.transform = 'scale(0.8)';
-              element.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
-            });
-
-            // 使用 Masonry 的 appended 方法
-            masonryInstance.current.appended(newItems);
-            
-            // 实现 stagger 效果 - 每个元素延迟 40ms 出现
-            newItems.forEach((item, index) => {
-              setTimeout(() => {
-                const element = item as HTMLElement;
-                element.style.opacity = '1';
-                element.style.transform = 'scale(1)';
-              }, index * 40); // 40ms 间隔，匹配原项目的 stagger: '0.04s'
-            });
-          }
-        }
-        
-        // 更新之前的文章数量
-        setPreviousPostsLength(posts.length);
-      }, 50);
-    }
-  }, [posts, previousPostsLength]);
+  // 移除 useEffect，改为直接 DOM 操作
 
   // 判断是否为特色文章
   const isFeaturedPost = (index: number): boolean => {
@@ -117,14 +87,44 @@ export function LoadMorePosts({
       
       const data = await response.json();
       
-      // 添加新文章到现有列表
+      // 更新状态，让 React 重新渲染
       setPosts(prevPosts => [...prevPosts, ...data.posts]);
       setPage(nextPage);
       setHasMore(data.hasNext);
       
-      
-      // 原项目不改变 URL，只是在同一页面填充内容
-      // 所以我们不需要更新 URL
+      // 手动实现浮现动画效果
+      requestAnimationFrame(() => {
+        if (gridRef.current && masonryInstance.current) {
+          const allItems = gridRef.current.querySelectorAll('.js-post');
+          const newItemsCount = data.posts.length;
+          const newItems = Array.from(allItems).slice(-newItemsCount);
+          
+          if (newItems.length > 0) {
+            // 1. 先设置新元素为隐藏状态
+            newItems.forEach((item) => {
+              const element = item as HTMLElement;
+              element.classList.add('fade-in-initial');
+            });
+            
+            // 2. 让 Masonry 重新布局
+            masonryInstance.current.appended(newItems);
+            
+            // 3. 延迟后依次显示每个元素，创造浮现效果
+            newItems.forEach((item, index) => {
+              setTimeout(() => {
+                const element = item as HTMLElement;
+                element.classList.remove('fade-in-initial');
+                element.classList.add('fade-in-final');
+                
+                // 动画完成后清理类名
+                setTimeout(() => {
+                  element.classList.remove('fade-in-final');
+                }, 600); // 等待动画完成
+              }, index * 120); // 每个元素间隔 120ms 出现，创造更明显的波浪效果
+            });
+          }
+        }
+      });
       
     } catch (error) {
       console.error('Error loading more posts:', error);

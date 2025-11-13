@@ -656,14 +656,30 @@
     margin-top: 25px;
   }
 
-  /* Post transition effects - 复刻原项目的文章过渡动画 */
+  /* Post transition effects - 支持浮现动画 */
   .js-post {
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    /* 默认状态，准备接受动画 */
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 
   a > .js-post:hover {
-    transform: translateY(-3px);
+    transform: translateY(-3px) scale(1);
     opacity: 0.6;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  /* 新文章浮现动画的初始状态 */
+  .js-post.fade-in-initial {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  /* 新文章浮现动画的最终状态 */
+  .js-post.fade-in-final {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 
   /* Masonry 布局过渡效果 - 匹配原项目的 stagger 填充效果 */
@@ -672,10 +688,7 @@
   }
 
   .js-posts .js-post {
-    /* 初始状态为可见，避免闪烁 */
-    opacity: 1;
-    transform: scale(1);
-    /* 过渡效果将通过 JavaScript 动态设置 */
+    /* 让 Masonry 完全控制动画 */
   }
 
   /* Search Results 动效 */
