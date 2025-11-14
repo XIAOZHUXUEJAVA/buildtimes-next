@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BuildTimes Next
 
-## Getting Started
+基于 [Eduardo Boucas 的 buildtimes](https://github.com/eduardoboucas/buildtimes) 博客的 Next.js 16 重构版本。
 
-First, run the development server:
+## 关于项目
+
+这是使用 Next.js 16 和 App Router 对 Eduardo 个人博客的现代化重新实现。
+
+## 技术栈
+
+- **Next.js 16** - 使用 App Router 的 React 框架
+- **TypeScript** - 类型安全
+- **Tailwind CSS** - 样式框架
+- **MDX** - 支持 React 组件的 Markdown
+- **Shiki** - 代码语法高亮
+- **Fuse.js** - 搜索功能
+
+## 快速开始
+
+1. 安装依赖：
+
+```bash
+npm install
+```
+
+2. 启动开发服务器：
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. 在浏览器中打开 [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 脚本命令
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - 启动开发服务器
+- `npm run build` - 构建生产版本
+- `npm run start` - 启动生产服务器
+- `npm run lint` - 运行代码检查
 
-## Learn More
+## 原项目
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+本项目基于 [Eduardo Boucas 的 buildtimes](https://github.com/eduardoboucas/buildtimes) - 查看原项目了解更多背景和历史。
