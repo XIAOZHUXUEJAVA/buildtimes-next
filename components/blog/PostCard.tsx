@@ -44,14 +44,20 @@ export function PostCard({
       <article
         className={cn(
           "post post--small relative block max-w-full",
-          isHeadline ? "p-0" : "p-[30px]", // headline 没有 padding
+          isHeadline ? "p-[30px] md:p-0" : "p-[30px]", // 移动端统一使用padding，桌面端headline无padding
           isFeatured && "post--featured lg:border lg:border-border"
         )}
       >
         {/* 标题 */}
         {isHeadline ? (
           <h2 className="post__title text-center">
-            <FeatureTitle title={post.title} />
+            {/* 移动端显示普通标题，桌面端显示FeatureTitle */}
+            <span className="block md:hidden font-primary font-bold text-[35px] mb-4">
+              {post.title}
+            </span>
+            <span className="hidden md:block">
+              <FeatureTitle title={post.title} />
+            </span>
           </h2>
         ) : (
           <h2
@@ -67,8 +73,8 @@ export function PostCard({
         {/* 文章正文摘要 */}
         <div
           className={cn(
-            "post__body font-primary leading-[1.5]",
-            isHeadline ? "text-[21px] mt-[15px] md:mt-[25px]" : "text-[18px]",
+            "post__body font-primary leading-[1.5] text-[18px]",
+            isHeadline ? "mt-0 md:mt-[25px]" : "", // 移动端不需要额外margin，桌面端保持原有设置
             isFeatured && "lg:columns-2",
             "md:text-justify"
           )}
