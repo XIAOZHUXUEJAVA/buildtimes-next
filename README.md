@@ -2,9 +2,6 @@
 
 基于 [Eduardo Boucas 的 buildtimes](https://github.com/eduardoboucas/buildtimes) 博客的 Next.js 16 重构版本。
 
-## 关于项目
-
-这是使用 Next.js 16 和 App Router 对 Eduardo 个人博客的现代化重新实现。
 
 ## 技术栈
 
