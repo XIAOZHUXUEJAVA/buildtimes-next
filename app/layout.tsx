@@ -4,10 +4,12 @@ import { Masthead } from "@/components/layout/Masthead";
 
 export const metadata: Metadata = {
   title: "Build Times",
-  description: "A web development periodical by Eduardo Bouças",
+  description:
+    "A Next.js and Tailwind CSS recreation of Eduardo Bouças' Build Times website",
   openGraph: {
     title: "Build Times",
-    description: "A web development periodical by Eduardo Bouças",
+    description:
+      "A Next.js and Tailwind CSS recreation of Eduardo Bouças' Build Times website",
     url: "https://eduardoboucas.com",
     siteName: "Build Times",
     locale: "en_US",
@@ -30,9 +32,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col">
         <Masthead />
-        <main className="flex-1">
-          {children}
-        </main>
+        <main className="flex-1">{children}</main>
       </body>
     </html>
   );
